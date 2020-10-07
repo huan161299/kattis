@@ -15,7 +15,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="softpasswords.cpp">
+    <ClCompile Include="classy.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
