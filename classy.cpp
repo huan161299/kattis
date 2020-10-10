@@ -1,6 +1,6 @@
 #include <iostream>
 #include <string>
-#include <map>
+#include <unordered_map>
 #include <algorithm>
 
 using namespace std;
@@ -16,7 +16,7 @@ int main() {
 		int n;
 		cin >> n;
 
-		map <int, string> people;
+		unordered_map <string, string> people;
 
 		while (n--) {
 			string s1, s2, s3;
@@ -24,26 +24,44 @@ int main() {
 			s1.pop_back();
 
 			string data;
-			int value = 0;
+			string value = "";
 
-			for (auto i = s2.rbegin(); i != s2.rend(); ++i) {
-				if (*i == '-' || *i == ' ') {
-
-					if (data.compare("reppu") == 0) value = value * 10 + 3;
-					else if (data.compare("elddim") == 0) value = value * 10 + 2;
-					else if (data.compare("rewol") == 0) value = value * 10 + 1;
-					data = "";
+			for (auto i = s2.begin(); i < s2.end(); ++i) {
+				if (*i == 'u') {
+					value += 'a';
+					++++++++++i;
+					if (i == s2.end()) break;
 				}
-				else data += *i;
+
+				else if (*i == 'm') {
+					value += 'b';
+					++++++++++++i;
+					if (i == s2.end()) break;
+				}
+
+				else if (*i == 'l') {
+					value += 'c';
+					++++++++++i;
+					if (i == s2.end()) break;
+				}
 			}
-			if (data.compare("reppu") == 0) value = value * 10 + 3;
-			else if (data.compare("elddim") == 0) value = value * 10 + 2;
-			else if (data.compare("rewol") == 0) value = value * 10 + 1;
-			people[value] = s1;
+
+			reverse(value.begin(), value.end());
+
+			while (value.size() < 10) value += 'b';
+
+			people[value + ' ' + s1] = s1;
+			value = "";
 		}
 
-		for (auto i = people.rbegin(); i != people.rend(); ++i)
-			cout << i->second << '\n';
+		vector<string> keys;
+		for (auto& it : people) {
+			keys.push_back(it.first);
+		}
+
+		sort(keys.begin(), keys.end());
+
+		for (auto& it: keys) cout << people[it] << '\n';
 
 		cout << "==============================\n";
 	}
